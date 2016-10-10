@@ -19,8 +19,8 @@ html
                             .chat-wrap
                         .chat-nav
                             .chat-nav-wrap
-                                button.reply(type="button")回覆
-                                button.replyimg(type="button")貼圖
+                                button.reply(type="button" onclick ="ajaxGet('nav-reply');")訊息
+                                button.replyimg(type="button" onclick ="ajaxGet('nav-image')")貼圖
                             .chat-nav-ajax
 
 

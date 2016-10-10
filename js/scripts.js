@@ -1,8 +1,9 @@
-jQuery(document).ready(function($) {
+function ajaxGet($project) {
     $.ajax({
-        url: "/templates/nav-reply/nav-reply.html",
+        url: '/templates/' + $project + '.html',
         success: function(result) {
-            $(".chat-nav-ajax").html(result);
+            $('.chat-nav-ajax').html(result);
         }
     });
-})
+}
+//ajaxGet('nav-image');
