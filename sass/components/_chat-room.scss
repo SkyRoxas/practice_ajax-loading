@@ -13,8 +13,11 @@
     }
 
     .chat-content {
-        min-height: 400px;
+        height: 400px;
+        overflow-y: scroll;
         border: 1px solid rgba(0,0,0,0.2);
+        padding: 20px;
+        box-sizing: border-box;
     }
 
     .chat-nav {
@@ -35,7 +38,7 @@
 //貼圖區塊
 
 .chat-image {
-    .image-item {
+    .image-content {
         @include child-margin(10px);
         border: 1px solid rgba(0,0,0,0.2);
 
@@ -43,8 +46,16 @@
             display: flex;
             padding: 20px 0;
 
-            img {
-                max-width: 120px;
+            .image-item {
+                img {
+                    max-width: 120px;
+                    opacity: 0.5;
+                }
+                &.active{
+                  img{
+                    opacity: 1;
+                  }
+                }
             }
         }
     }
