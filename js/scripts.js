@@ -14,6 +14,12 @@ var time =
 
 
 //ajax loading
+$.ajax({
+    url: '/templates/nav-reply.html',
+    success: function(result) {
+        $('.chat-nav-ajax').html(result);
+    }
+});
 function ajaxGet($project) {
     $.ajax({
         url: '/templates/' + $project + '.html',
@@ -38,7 +44,7 @@ $(document).ajaxComplete(function() {
 function replybtn() {
     var messageObj = new Object;
     messageObj.user = "you";
-      messageObj.message = $('textarea').val();
+    messageObj.message = $('textarea').val();
     messageObj.time = time;
     messageObj.uid = messageArray.length + 1;
     messageArray.push(messageObj);
@@ -47,14 +53,14 @@ function replybtn() {
         if ($key == "message") {
           //wrap
           var group = $value.length;
-          $('.chat-content').append('<div class ="message message-'+group+'"></div>');
+          $('.chat-content .chat-wrap').append('<div class ="message message-'+group+' '+"right"+'"><div class ="field-content"></div></div>');
           //取值加入wrap
             $.each($value[$value.length - 1], function($key, $value) {
                 if ($key == "time") {
-                      $('.chat-content').find('.message-'+group).append('<div class ="field-item field-time">'+$value+'</div>');
+                      $('.chat-content').find('.message-'+group).children('.field-content').append('<div class ="field-item field-time"><h5>'+$value+'</h5></div>');
                 }
                 if ($key == "message") {
-                    $('.chat-content').find('.message-'+group).append('<div class ="field-item field-message">'+$value+'</div>');
+                    $('.chat-content').find('.message-'+group).children('.field-content').append('<div class ="field-item field-message"><p>'+$value+'</p></div>');
                 }
             })
         }
@@ -74,14 +80,14 @@ function imgbtn() {
         if ($key == "message") {
           //wrap
           var group = $value.length;
-          $('.chat-content').append('<div class ="message message-'+group+'"></div>');
+          $('.chat-content .chat-wrap').append('<div class ="message message-'+group+' '+"right"+'"><div class ="field-content"></div></div>');
           //取值加入wrap
             $.each($value[$value.length - 1], function($key, $value) {
                 if ($key == "time") {
-                      $('.chat-content').find('.message-'+group).append('<div class ="field-item field-time">'+$value+'</div>');
+                      $('.chat-content').find('.message-'+group).children('.field-content').append('<div class ="field-item field-time"><h5>'+$value+'</h5></div>');
                 }
                 if ($key == "message") {
-                    $('.chat-content').find('.message-'+group).append('<div class ="field-item field-message"><img src ="' + $value + '" style ="max-width:150px;"></div>');
+                    $('.chat-content').find('.message-'+group).children('.field-content').append('<div class ="field-item field-message message-image"><img src ="' + $value + '" style ="max-width:150px;"></div>');
                 }
             })
         }
