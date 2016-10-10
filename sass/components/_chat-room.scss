@@ -1,0 +1,75 @@
+#page-title{
+  text-align: center;
+}
+.room {
+    .chat-title {
+        .chat-wrap {
+            padding: 20px;
+            text-align: center;
+            background: #000000;
+            color: #ffffff;
+        }
+    }
+
+    .chat-content {
+        min-height: 400px;
+        border: 1px solid;
+    }
+
+    .chat-nav {
+        width: 100%;
+
+        .chat-nav-wrap {
+            display: flex;
+
+            button {
+                flex: 1;
+                padding: 10px;
+            }
+        }
+
+        .chat-nav-ajax {
+
+        }
+    }
+}
+//貼圖區塊
+.chat-image {
+    .image-item {
+        @include child-margin(10px);
+
+        .wrap {
+            display: flex;
+            padding: 20px 0px;
+
+            img {
+                max-width: 120px;
+            }
+        }
+    }
+
+    .nav-item {
+        button {
+            width: 100%;
+            padding: 10px;
+        }
+    }
+}
+//回覆區塊
+.chat-reply{
+  .reply-content{
+    textarea{
+      width: 100%;
+      min-height: 150px;
+      display: block;
+      box-sizing: border-box;
+      padding: 15px;
+    }
+  }
+  .nav-item {
+      button {
+          width: 100%;
+          padding: 10px;
+      }
+  }
+}
