@@ -16,16 +16,19 @@ var time =
 
 
 //ajax loading
-$.ajax({
-    url: '/templates/nav-reply.html',
-    success: function(result) {
-        $('.chat-nav-ajax').html(result);
-    }
-});
+$(document).ready(function(){
+  $.ajax({
+      url: '../templates/nav-reply.html',
+      success: function(result) {
+          $('.chat-nav-ajax').html(result);
+      }
+  });
+})
+
 
 function ajaxGet($project) {
     $.ajax({
-        url: '/templates/' + $project + '.html',
+        url: '../templates/' + $project + '.html',
         success: function(result) {
             $('.chat-nav-ajax').html(result);
         }
@@ -39,7 +42,7 @@ function scollToBottom($element) {
 
 
 
-
+//add active class for message image
 $(document).ajaxComplete(function() {
     var imageItem = $('.chat-image').find('.image-content .wrap').children('.image-item');
     imageItem.eq(0).addClass('active');
