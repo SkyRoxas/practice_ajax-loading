@@ -41,6 +41,18 @@ function scollToBottom($element) {
 }
 
 
+//add active class
+$(document).ready(function() {
+    var navItem = $('.chat-nav').find('.chat-nav-wrap').children('button');
+    navItem.eq(0).addClass('active');
+    navItem.each(function() {
+        $(this).click(function() {
+            navItem.removeClass('active');
+            $(this).addClass('active');
+        })
+    })
+})
+
 
 //add active class for message image
 $(document).ajaxComplete(function() {

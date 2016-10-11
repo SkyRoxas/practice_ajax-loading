@@ -88,6 +88,10 @@
             button {
                 flex: 1;
                 padding: 10px;
+                &.active{
+                  background: #000000;
+                  color: #ffffff;
+                }
             }
         }
 
