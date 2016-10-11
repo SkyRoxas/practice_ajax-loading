@@ -5,7 +5,14 @@
 .flex-right {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+
+.flex-left {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     align-items: flex-end;
 }
 
@@ -21,7 +28,7 @@
 
     .chat-content {
         height: 400px;
-        @include child-margin(15px);
+        @include child-margin(25px);
         overflow-y: scroll;
         border: 1px solid rgba(0,0,0,0.2);
         padding: 40px;
@@ -31,7 +38,8 @@
             .message {
                 .field-content {
                     .field-message:not(.message-image) {
-                        display: inline;
+                        display: block;
+                        box-sizing: border-box;
                         max-width: 100%;
                         padding: 5px 15px;
                         background: #DFDFDF;
@@ -39,9 +47,32 @@
                     }
                 }
 
+                &.left {
+                    display: flex;
+                    align-items: flex-end;
+                    flex-direction: row;
+
+                    .field-content {
+                        @extend .flex-left;
+                    }
+                }
+
                 &.right {
+                    display: flex;
+                    align-items: flex-end;
+                    flex-direction: row-reverse;
+
                     .field-content {
                         @extend .flex-right;
+                    }
+                }
+
+                &.friend-message {
+                    .field-content {
+                        .field-message {
+                            background: #000000;
+                            color: #ffffff;
+                        }
                     }
                 }
             }
