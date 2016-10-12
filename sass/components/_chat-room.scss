@@ -131,8 +131,12 @@
 
     .nav-item {
         button {
-            width: 100%;
-            padding: 10px;
+          width: 100%;
+          padding: 10px;
+          background: #000000;
+          color: #ffffff;
+          border: none;
+          display: block;
         }
     }
 }
@@ -157,7 +161,8 @@
         button {
             width: 100%;
             padding: 10px;
-            background: #dfdfdf;
+            background: #000000;
+            color: #ffffff;
             border: none;
             display: block;
         }

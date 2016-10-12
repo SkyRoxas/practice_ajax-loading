@@ -1,3 +1,6 @@
+//查看cookie
+console.log(document.cookie);
+
 //ajax loading
 $(document).ready(function() {
     $.ajax({
@@ -51,9 +54,6 @@ $(document).ajaxComplete(function() {
 
 
 
-
-
-
 //好友訊息
 function friendMessage() {
     //時間
@@ -77,9 +77,8 @@ var messageArray = [];
 
 replyObj.message = messageArray;
 
-//document.cookie = replyObj.message;
-//document.cookie =replyObj.message;
-console.log(document.cookie);
+
+//document.cookie = "name=123";
 
 
 //物件輸出
@@ -103,7 +102,9 @@ function outPutObj() {
     messageObj.time = time;
     messageObj.uid = messageArray.length + 1;
     messageArray.push(messageObj);
+
     console.log(JSON.stringify(replyObj));
+
     $.each(replyObj, function($key, $value) {
         if ($key == "message") {
             //wrap
@@ -140,6 +141,7 @@ function outPutObj() {
         }
 
     })
+    document.cookie = JSON.stringify(replyObj);
 }
 
 
@@ -155,9 +157,19 @@ function replybtn() {
 
 
 
+
+
 //貼圖按鈕 把資訊導入物件內
 function imgbtn() {
     outPutObj();
     scollToBottom('.chat-content')
     friendMessage();
 }
+$(document).ajaxComplete(function() {
+    $('button.replybtn').click(function() {
+        replybtn();
+    })
+    $('button.imgbtn').click(function() {
+        imgbtn();
+    })
+})
