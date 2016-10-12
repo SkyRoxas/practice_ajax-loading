@@ -17,6 +17,7 @@
 }
 
 .room {
+    //標題
     .chat-title {
         .chat-wrap {
             padding: 20px;
@@ -25,7 +26,7 @@
             color: #ffffff;
         }
     }
-
+    //message 區塊
     .chat-content {
         height: 400px;
         @include child-margin(25px);
@@ -35,6 +36,7 @@
         box-sizing: border-box;
 
         .chat-wrap {
+            //對話訊息
             .message {
                 .field-content {
                     .field-message:not(.message-image) {
@@ -78,7 +80,7 @@
             }
         }
     }
-
+    //控制區域
     .chat-nav {
         width: 100%;
 
@@ -88,9 +90,12 @@
             button {
                 flex: 1;
                 padding: 10px;
-                &.active{
-                  background: #000000;
-                  color: #ffffff;
+                border: none;
+                background: #dfdfdf;
+
+                &.active {
+                    background: #000000;
+                    color: #ffffff;
                 }
             }
         }
@@ -152,6 +157,9 @@
         button {
             width: 100%;
             padding: 10px;
+            background: #dfdfdf;
+            border: none;
+            display: block;
         }
     }
 }
