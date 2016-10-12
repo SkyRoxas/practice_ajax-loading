@@ -1,23 +1,3 @@
-var replyObj = new Object();
-var messageArray = [];
-
-replyObj.message = messageArray;
-
-//document.cookie = replyObj.message;
-//document.cookie =replyObj.message;
-console.log(document.cookie);
-
-//時間
-var mydate = new Date();
-var time =
-    mydate.getFullYear() + "/" +
-    (mydate.getMonth() + 1) + '/' +
-    mydate.getDate() + ' ' +
-    mydate.getHours() + ':' +
-    mydate.getMinutes();
-
-
-
 //ajax loading
 $(document).ready(function() {
     $.ajax({
@@ -71,8 +51,19 @@ $(document).ajaxComplete(function() {
 
 
 
+
+
+
 //好友訊息
 function friendMessage() {
+    //時間
+    var mydate = new Date();
+    var time =
+        mydate.getFullYear() + "/" +
+        (mydate.getMonth() + 1) + '/' +
+        mydate.getDate() + ' ' +
+        mydate.getHours() + ':' +
+        mydate.getMinutes();
     setTimeout(function() {
         $('.chat-content .chat-wrap').append('<div class ="message friend-message left"><div class ="field-content"><div class ="field-item field-message"><p>你好安安</p></div><div class ="field-item field-time"><h5>' + time + '</h5></div></div>');
         scollToBottom('.chat-content');
@@ -81,9 +72,31 @@ function friendMessage() {
 
 }
 
+var replyObj = new Object();
+var messageArray = [];
+
+replyObj.message = messageArray;
+
+//document.cookie = replyObj.message;
+//document.cookie =replyObj.message;
+console.log(document.cookie);
+
+
 //物件輸出
 function outPutObj() {
+
+    //時間
+    var mydate = new Date();
+    var time =
+        mydate.getFullYear() + "/" +
+        (mydate.getMonth() + 1) + '/' +
+        mydate.getDate() + ' ' +
+        mydate.getHours() + ':' +
+        mydate.getMinutes();
+
+    //物件輸出
     var messageObj = new Object;
+
     messageObj.user = "you";
     messageObj.message = $('textarea').val();
     messageObj.messageImg = $('.image-item.active').find('img').attr('src');
@@ -96,11 +109,15 @@ function outPutObj() {
             //wrap
             var group = $value.length;
             $('.chat-content .chat-wrap').append('<div class ="message message-' + group + ' ' + "right" + '"><div class ="field-content"></div></div>');
+
             //取值加入wrap
             $.each($value[$value.length - 1], function($key, $value) {
+                //時間
                 if ($key == "time") {
                     $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-time"><h5>' + $value + '</h5></div>');
                 }
+
+                //訊息
                 if ($key == "message") {
                     if ($value == null) {
                         console.log($value);
@@ -108,6 +125,8 @@ function outPutObj() {
                         $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-message"><p>' + $value + '</p></div>');
                     }
                 }
+
+                //貼圖
                 if ($key == "messageImg") {
                     if ($value == null) {
                         console.log($value);
@@ -116,6 +135,7 @@ function outPutObj() {
                     }
 
                 }
+
             })
         }
 
