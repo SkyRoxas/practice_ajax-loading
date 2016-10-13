@@ -58,12 +58,13 @@ var messageArray = [];
 
 replyObj.message = messageArray;
 function cookieSet(){
-  document.cookie = JSON.stringify(replyObj);
+  Cookies.set('message',replyObj)
+  //document.cookie = JSON.stringify(replyObj);
 }
 function cookieGetMessage() {
 
     //查看cookie,將cookie存取的 messageArray 資料帶回 messageArray
-    var cookieArr = JSON.parse(document.cookie).message;
+    var cookieArr = JSON.parse(Cookies.get("message")).message;
     console.log(cookieArr);
     for (var i = 0; i < cookieArr.length; i++) {
         messageArray.push(cookieArr[i]);
