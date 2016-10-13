@@ -57,7 +57,9 @@ var replyObj = new Object();
 var messageArray = [];
 
 replyObj.message = messageArray;
-
+function cookieSet(){
+  document.cookie = JSON.stringify(replyObj);
+}
 function cookieGetMessage() {
 
     //查看cookie,將cookie存取的 messageArray 資料帶回 messageArray
@@ -146,8 +148,8 @@ function friendMessage() {
     messageObj.time = time;
     messageObj.uid = messageArray.length + 1;
     messageArray.push(messageObj);
+cookieSet();
 
-    document.cookie = JSON.stringify(replyObj);
 
     $.each(replyObj, function($key, $value) {
         if ($key == "message") {
@@ -211,8 +213,8 @@ function outPutObj() {
     messageObj.time = time;
     messageObj.uid = messageArray.length + 1;
     messageArray.push(messageObj);
+cookieSet();
 
-    document.cookie = JSON.stringify(replyObj);
     //console.log(JSON.stringify(replyObj));
 
     $.each(replyObj, function($key, $value) {
