@@ -61,11 +61,52 @@ replyObj.message = messageArray;
 function cookieGetMessage() {
 
     //查看cookie
-    console.log(JSON.parse(document.cookie).message);
-    messageArray.concat(JSON.parse(document.cookie).message);
-    console.log(messageArray);
+    var cookieArr = JSON.parse(document.cookie).message;
+    console.log(cookieArr);
+    for (var i = 0; i < cookieArr.length; i++) {
+        messageArray.push(cookieArr[i]);
+    }
+
+    //console.log(messageArray);
     console.log("cookie", JSON.stringify(replyObj));
     //console.log('cookie-string',JSON.stringify(document.cookie));
+
+    $.each(replyObj, function($key, $value) {
+        if ($key == "message") {
+            //wrap
+            var group = $value.length;
+            $('.chat-content .chat-wrap').append('<div class ="message message-' + group + ' ' + "right" + '"><div class ="field-content"></div></div>');
+
+            //取值加入wrap
+            $.each($value[$value.length - 1], function($key, $value) {
+                //時間
+                if ($key == "time") {
+                    $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-time"><h5>' + $value + '</h5></div>');
+                }
+
+                //訊息
+                if ($key == "message") {
+                    if ($value == null) {
+                        console.log($value);
+                    } else {
+                        $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-message"><p>' + $value + '</p></div>');
+                    }
+                }
+
+                //貼圖
+                if ($key == "messageImg") {
+                    if ($value == null) {
+                        console.log($value);
+                    } else {
+                        $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-message-image"><img src ="' + $value + '" style ="max-width:150px;"></div>');
+                    }
+
+                }
+
+            })
+        }
+
+    })
 }
 
 $(document).ready(function() {
