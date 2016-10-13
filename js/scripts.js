@@ -61,7 +61,10 @@ replyObj.message = messageArray;
 function cookieGetMessage() {
 
     //查看cookie
-    console.log("cookie", document.cookie);
+    console.log(JSON.parse(document.cookie).message);
+    messageArray.concat(JSON.parse(document.cookie).message);
+    console.log(messageArray);
+    console.log("cookie", JSON.stringify(replyObj));
     //console.log('cookie-string',JSON.stringify(document.cookie));
 }
 
@@ -157,6 +160,7 @@ function outPutObj() {
     messageObj.time = time;
     messageObj.uid = messageArray.length + 1;
     messageArray.push(messageObj);
+
     document.cookie = JSON.stringify(replyObj);
     //console.log(JSON.stringify(replyObj));
 
