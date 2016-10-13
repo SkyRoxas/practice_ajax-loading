@@ -1,6 +1,3 @@
-//查看cookie
-console.log(document.cookie);
-
 //ajax loading
 $(document).ready(function() {
     $.ajax({
@@ -54,8 +51,29 @@ $(document).ajaxComplete(function() {
 
 
 
-//好友訊息
+
+
+var replyObj = new Object();
+var messageArray = [];
+
+replyObj.message = messageArray;
+
+function cookieGetMessage() {
+
+    //查看cookie
+    console.log("cookie", document.cookie);
+    //console.log('cookie-string',JSON.stringify(document.cookie));
+}
+
+$(document).ready(function() {
+    cookieGetMessage();
+})
+
+
+
+//好友對話輸出
 function friendMessage() {
+
     //時間
     var mydate = new Date();
     var time =
@@ -64,24 +82,61 @@ function friendMessage() {
         mydate.getDate() + ' ' +
         mydate.getHours() + ':' +
         mydate.getMinutes();
-    setTimeout(function() {
-        $('.chat-content .chat-wrap').append('<div class ="message friend-message left"><div class ="field-content"><div class ="field-item field-message"><p>你好安安</p></div><div class ="field-item field-time"><h5>' + time + '</h5></div></div>');
-        scollToBottom('.chat-content');
-    }, 2000);
 
+    //物件輸出
+    var messageObj = new Object;
 
+    messageObj.user = "friend";
+    messageObj.message = "你好安安";
+    //messageObj.messageImg = $('.image-item.active').find('img').attr('src');
+    messageObj.time = time;
+    messageObj.uid = messageArray.length + 1;
+    messageArray.push(messageObj);
+
+    console.log(JSON.stringify(replyObj));
+
+    $.each(replyObj, function($key, $value) {
+        if ($key == "message") {
+            //wrap
+            var group = $value.length;
+            $('.chat-content .chat-wrap').append('<div class ="message message-' + group + ' ' + "left" + '"><div class ="field-content"></div></div>');
+
+            //取值加入wrap
+            $.each($value[$value.length - 1], function($key, $value) {
+                //時間
+                if ($key == "time") {
+                    $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-time"><h5>' + $value + '</h5></div>');
+                }
+
+                //訊息
+                if ($key == "message") {
+                    if ($value == null) {
+                        console.log($value);
+                    } else {
+                        $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-message"><p>' + $value + '</p></div>');
+                    }
+                }
+
+                //貼圖
+                if ($key == "messageImg") {
+                    if ($value == null) {
+                        console.log($value);
+                    } else {
+                        $('.chat-content').find('.message-' + group).children('.field-content').append('<div class ="field-item field-message-image"><img src ="' + $value + '" style ="max-width:150px;"></div>');
+                    }
+
+                }
+
+            })
+        }
+
+    })
+    scollToBottom('.chat-content');
+    //document.cookie = JSON.stringify(replyObj);
 }
 
-var replyObj = new Object();
-var messageArray = [];
 
-replyObj.message = messageArray;
-
-
-//document.cookie = "name=123";
-
-
-//物件輸出
+//訊息對話輸出
 function outPutObj() {
 
     //時間
@@ -102,8 +157,8 @@ function outPutObj() {
     messageObj.time = time;
     messageObj.uid = messageArray.length + 1;
     messageArray.push(messageObj);
-
-    console.log(JSON.stringify(replyObj));
+    document.cookie = JSON.stringify(replyObj);
+    //console.log(JSON.stringify(replyObj));
 
     $.each(replyObj, function($key, $value) {
         if ($key == "message") {
@@ -141,7 +196,7 @@ function outPutObj() {
         }
 
     })
-    document.cookie = JSON.stringify(replyObj);
+
 }
 
 
@@ -151,20 +206,24 @@ function outPutObj() {
 function replybtn() {
     outPutObj();
     $('textarea').val(null);
-    scollToBottom('.chat-content')
-    friendMessage();
+    scollToBottom('.chat-content');
+    setTimeout(function() {
+        friendMessage();
+    }, 2000);
 }
-
-
-
 
 
 //貼圖按鈕 把資訊導入物件內
 function imgbtn() {
     outPutObj();
-    scollToBottom('.chat-content')
-    friendMessage();
+    scollToBottom('.chat-content');
+    setTimeout(function() {
+        friendMessage();
+    }, 2000);
 }
+
+
+//綁定 button click
 $(document).ajaxComplete(function() {
     $('button.replybtn').click(function() {
         replybtn();
