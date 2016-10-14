@@ -284,6 +284,13 @@ $(document).ready(function(){
       ajaxGet('nav-image');
   })
 })
+$('button.reply').click(function() {
+    ajaxGet('nav-reply');
+    $('.review-image').fadeOut();
+})
+$('button.replyimg').click(function() {
+    ajaxGet('nav-image');
+})
 
 $(document).ajaxComplete(function() {
     $('button.replybtn').click(function() {
