@@ -1,13 +1,4 @@
 //ajax loading
-$(document).ready(function() {
-    $.ajax({
-        url: '../templates/nav-reply.html',
-        success: function(result) {
-            $('.chat-nav-ajax').html(result);
-        }
-    });
-})
-
 function ajaxGet($project) {
     $.ajax({
         url: '../templates/' + $project + '.html',
@@ -16,6 +7,25 @@ function ajaxGet($project) {
         }
     });
 }
+
+$(document).ready(function() {
+    $.ajax({
+        url: '../templates/nav-reply.html',
+        success: function(result) {
+            $('.chat-nav-ajax').html(result);
+        }
+    });
+
+    $('button.reply').click(function() {
+        ajaxGet('nav-reply');
+        $('.review-image').fadeOut();
+    })
+    $('button.replyimg').click(function() {
+        ajaxGet('nav-image');
+    })
+})
+
+
 
 
 
@@ -274,23 +284,7 @@ function imgbtn() {
 }
 
 
-//綁定 button click
-$(document).ready(function(){
-  $('button.reply').click(function() {
-      ajaxGet('nav-reply');
-      $('.review-image').fadeOut();
-  })
-  $('button.replyimg').click(function() {
-      ajaxGet('nav-image');
-  })
-})
-$('button.reply').click(function() {
-    ajaxGet('nav-reply');
-    $('.review-image').fadeOut();
-})
-$('button.replyimg').click(function() {
-    ajaxGet('nav-image');
-})
+
 
 $(document).ajaxComplete(function() {
     $('button.replybtn').click(function() {
