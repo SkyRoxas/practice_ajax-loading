@@ -56,16 +56,19 @@ $(document).ajaxComplete(function() {
             //未選取元素加入 active class
             $(this).addClass('active');
             //將 active 的圖片載入
-            //$('.review-image .wrap').html($(this).html());
+            $('.review-image .wrap').html($(this).html());
+            $('.review-image').fadeIn();
             //綁定 active 之 click 事件
             $(this).children().on('click', function() {
-              $('button.imgbtn').trigger('click');
+                //$('button.imgbtn').trigger('click');
+                //$('.review-image').fadeOut();
             })
 
-            //review image click事件
-            // $('.review-image').click(function() {
-            //     $('button.imgbtn').trigger('click');
-            // })
+            //review image click事件(不明原因～如果不限定使用 one 它執行次數會遞增)
+            $('.review-image').one('click', function() {
+                $('button.imgbtn').trigger('click');
+                $('.review-image').fadeOut();
+            });
 
         })
     })
@@ -272,6 +275,16 @@ function imgbtn() {
 
 
 //綁定 button click
+$(document).ready(function(){
+  $('button.reply').click(function() {
+      ajaxGet('nav-reply');
+      $('.review-image').fadeOut();
+  })
+  $('button.replyimg').click(function() {
+      ajaxGet('nav-image');
+  })
+})
+
 $(document).ajaxComplete(function() {
     $('button.replybtn').click(function() {
         replybtn();
