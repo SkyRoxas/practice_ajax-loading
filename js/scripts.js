@@ -25,7 +25,7 @@ function scollToBottom($element) {
 }
 
 
-//add active class
+//add active class for nav button
 $(document).ready(function() {
     var navItem = $('.chat-nav').find('.chat-nav-wrap').children('button');
     navItem.eq(0).addClass('active');
@@ -41,13 +41,36 @@ $(document).ready(function() {
 //add active class for message image
 $(document).ajaxComplete(function() {
     var imageItem = $('.chat-image').find('.image-content .wrap').children('.image-item');
-    imageItem.eq(0).addClass('active');
+
+    //preview 區塊
+    if ($('.review-image').length == 0) {
+        $('.chat-nav').append('<div class ="review-image"><div class ="wrap"></div></div>');
+    }
+
     imageItem.each(function() {
         $(this).click(function() {
+            //綁定 active 之外 取消 actice class
             imageItem.removeClass('active');
+            //綁定 active 之外 取消click 事件
+            imageItem.children().off('click');
+            //未選取元素加入 active class
             $(this).addClass('active');
+            //將 active 的圖片載入
+            //$('.review-image .wrap').html($(this).html());
+            //綁定 active 之 click 事件
+            $(this).children().on('click', function() {
+              $('button.imgbtn').trigger('click');
+            })
+
+            //review image click事件
+            // $('.review-image').click(function() {
+            //     $('button.imgbtn').trigger('click');
+            // })
+
         })
     })
+
+
 })
 
 
@@ -222,7 +245,7 @@ function outPutObj($user, $message) {
 
 //訊息產生
 function around_message() {
-    var message = ['馬上就要去當兵了～哀', '跟你說～我找到通往天國的鑰使了!!', '我就是傳說中的達爾！！！','不期不待～不受傷害～','跟你對話的我不是我,其實還有另外一個我！！','XD','說人話好不？'];
+    var message = ['馬上就要去當兵了～哀', '跟你說～我好像找到通往天國的鑰使了!!', '我就是傳說中的達爾！！！', '不期不待～不受傷害～', '跟你對話的我不是我,其實還有另外一個我！！', 'XD', '說人話好不？'];
     var aroundNum = Math.floor(Math.random() * message.length);
     //console.log(aroundNum);
     return message[aroundNum];
